@@ -1,8 +1,14 @@
-import { Routes, Route, Link, Navigate, NavLink } from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  Link,
+  Navigate,
+  useLocation,
+  useParams,
+} from 'react-router-dom';
 import 'bulma/css/bulma.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import './App.scss';
-import { useParams } from 'react-router-dom';
 
 const tabs = [
   { id: 'tab-1', title: 'Tab 1', content: 'Some text 1' },
@@ -49,22 +55,26 @@ export const App = () => (
     >
       <div className="container">
         <div className="navbar-brand">
-          <NavLink
+          <Link
             to="/"
-            className={({ isActive }) =>
-              isActive ? 'navbar-item is-active' : 'navbar-item'
+            className={
+              useLocation().pathname === '/'
+                ? 'navbar-item is-active'
+                : 'navbar-item'
             }
           >
             Home
-          </NavLink>
-          <NavLink
+          </Link>
+          <Link
             to="/tabs"
-            className={({ isActive }) =>
-              isActive ? 'navbar-item is-active' : 'navbar-item'
+            className={
+              useLocation().pathname.startsWith('/tabs')
+                ? 'navbar-item is-active'
+                : 'navbar-item'
             }
           >
             Tabs
-          </NavLink>
+          </Link>
         </div>
       </div>
     </nav>
